@@ -1,0 +1,12 @@
+{
+  "buildCommand": "cd shop && npm run build",
+  "outputDirectory": "shop/dist",
+  "installCommand": "cd shop && npm install",
+  "framework": "vite",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

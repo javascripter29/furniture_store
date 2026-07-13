@@ -3,8 +3,8 @@ import { FaShoppingCart } from "react-icons/fa";
 import Order from "./Order";
 
 const showOrders = (props) => {
-  let summa = 0 
-  props.orders.forEach(el => summa += Number.parseFloat(el.price))
+  let summa = 0;
+  props.orders.forEach((el) => (summa += Number.parseFloat(el.price)));
   return (
     <div>
       {props.orders.map((el) => (
@@ -26,16 +26,30 @@ const showNothing = () => {
 export default function Header(props) {
   let [cartOpen, setCartOpen] = useState(false);
 
+  const navItems = [
+    { key: "about", label: "Про нас" },
+    { key: "contacts", label: "Контакты" },
+    { key: "account", label: "Кабинет" },
+  ];
+
   return (
     <header>
-      {/* top bar contains logo then menu+cart grouping */}
       <div className="top-bar">
-        <span className="logo">House Staff</span>
+        <button className="logo" onClick={() => props.onNavigate("catalog")}>
+          House Staff
+        </button>
         <div className="nav-cart">
           <ul className="nav">
-            <li>Про нас</li>
-            <li>Контакты</li>
-            <li>Кабинет</li>
+            {navItems.map((item) => (
+              <li key={item.key}>
+                <button
+                  className={props.activePage === item.key ? "active" : ""}
+                  onClick={() => props.onNavigate(item.key)}
+                >
+                  {item.label}
+                </button>
+              </li>
+            ))}
           </ul>
           <FaShoppingCart
             onClick={() => setCartOpen((cartOpen = !cartOpen))}
